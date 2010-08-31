@@ -47,6 +47,16 @@ class Magic:
 
         magic_load(self.cookie, magic_file)
 
+    def __init__(self, mime=False, magic_file=None, flags=None):
+        if not flags:
+            flags = MAGIC_NONE
+
+        if mime:
+            flags |= MAGIC_MIME
+
+        self.cookie = magic_open(flags)
+
+        magic_load(self.cookie, magic_file)
 
     def from_buffer(self, buf):
         """
